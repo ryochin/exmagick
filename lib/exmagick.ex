@@ -220,12 +220,14 @@ defmodule ExMagick do
   def thumb(_handle, _width, _height), do: fail()
 
   @doc false
+  @spec image! :: handle
   def image! do
     {:ok, handle} = image()
     handle
   end
 
   @doc false
+  @spec image :: {:ok, handle} | exm_error
   def image do
     IO.puts(
       :stderr,
@@ -249,6 +251,7 @@ defmodule ExMagick do
 
   Image attributes may be tuned by using the `attr/3` function.
   """
+  @spec init :: {:ok, handle} | exm_error
   def init, do: fail()
 
   @doc """
@@ -352,5 +355,6 @@ defmodule ExMagick do
   end
 
   # XXX: this is to fool dialyzer
+  @spec fail :: {:ok, handle} | exm_error
   defp fail, do: ExMagick.Hidden.fail("native function error")
 end
